@@ -73,16 +73,40 @@
               <h3>Executive Exterior</h3>
               <p>Foam wash, wheel cleaning, paint-safe finish enhancement, and tire dressing.</p>
               <p class="price">$99+</p>
+              <button
+                class="btn btn-primary package-btn"
+                type="button"
+                data-package="Executive Exterior"
+                data-package-details="Foam wash, wheel cleaning, paint-safe finish enhancement, and tire dressing. Starting at $99+."
+              >
+                Select Package
+              </button>
             </article>
             <article class="card">
               <h3>Interior Revival</h3>
               <p>Deep vacuum, trim reset, leather conditioning, and sanitization treatment.</p>
               <p class="price">$149+</p>
+              <button
+                class="btn btn-primary package-btn"
+                type="button"
+                data-package="Interior Revival"
+                data-package-details="Deep vacuum, trim reset, leather conditioning, and sanitization treatment. Starting at $149+."
+              >
+                Select Package
+              </button>
             </article>
             <article class="card">
               <h3>Full Prestige Detail</h3>
               <p>Complete interior/exterior restoration with protective premium sealant.</p>
               <p class="price">$279+</p>
+              <button
+                class="btn btn-primary package-btn"
+                type="button"
+                data-package="Full Prestige Detail"
+                data-package-details="Complete interior/exterior restoration with protective premium sealant. Starting at $279+."
+              >
+                Select Package
+              </button>
             </article>
           </div>
         </div>
@@ -172,11 +196,12 @@
             <input id="addressLng" type="hidden" name="address_lng" />
             <label>
               Service Needed
-              <textarea name="request" rows="4" required></textarea>
+              <textarea id="requestNotes" name="request" rows="4" required></textarea>
             </label>
             <input id="nextRedirect" type="hidden" name="_next" value="https://calendly.com/aarmstrong1234" />
             <input type="hidden" name="_redirect" value="https://calendly.com/aarmstrong1234" />
             <button class="btn btn-primary" type="submit">Get My Quote &amp; Book</button>
+            <p class="hint">Tip: use the package buttons above to auto-fill this notes field.</p>
             <p id="addressHint" class="hint">Select a suggested address for best route accuracy.</p>
             <p id="formMessage" class="hint" role="status" aria-live="polite"></p>
           </form>
