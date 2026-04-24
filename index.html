@@ -51,13 +51,16 @@
             </div>
           </div>
           <aside class="card hero-card">
-            <h2>The Jubilee Experience</h2>
-            <ul>
-              <li>Concierge scheduling with streamlined booking flow</li>
-              <li>Premium-grade products for paint, trim, and interior finishes</li>
-              <li>Detailed service history for every client vehicle</li>
-              <li>On-location convenience at your home or office</li>
-            </ul>
+            <img
+              class="hero-photo"
+              src="assets/home-page.jpg"
+              alt="Luxury black vehicle feature collage"
+              loading="lazy"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+            />
+            <div class="hero-fallback" style="display: none">
+              Add the attached Home Page picture as <code>assets/home-page.jpg</code>.
+            </div>
           </aside>
         </div>
       </section>
@@ -87,27 +90,34 @@
 
       <section id="gallery" class="section">
         <div class="container">
-          <h2>Luxury Vehicle Graphics</h2>
+          <h2>Luxury Vehicle Gallery</h2>
           <div class="vehicle-grid">
             <article class="vehicle-card">
-              <img src="assets/sedan.svg" alt="Clean luxury sedan graphic" loading="lazy" />
+              <img src="assets/sedan.jpg" alt="Luxury sedan" loading="lazy" onerror="this.src='assets/sedan.svg'" />
               <div class="vehicle-copy">
-                <h3>Luxury Sedans</h3>
-                <p>Refined finishes tailored for executive daily drivers and premium fleets.</p>
+                <h3>Sedans</h3>
+                <p>Attached sedan photo highlights our premium black-finish detailing standard.</p>
               </div>
             </article>
             <article class="vehicle-card">
-              <img src="assets/suv.svg" alt="Clean luxury SUV graphic" loading="lazy" />
+              <img src="assets/suv.jpg" alt="Luxury SUV" loading="lazy" onerror="this.src='assets/suv.svg'" />
               <div class="vehicle-copy">
-                <h3>Premium SUVs</h3>
-                <p>Comprehensive treatments for larger cabins and family-ready interiors.</p>
+                <h3>SUVs</h3>
+                <p>Attached SUV image reflects the high-gloss exterior results we deliver.</p>
               </div>
             </article>
             <article class="vehicle-card">
-              <img src="assets/truck.svg" alt="Detailed luxury truck graphic" loading="lazy" />
+              <img src="assets/truck.jpg" alt="Luxury truck" loading="lazy" onerror="this.src='assets/truck.svg'" />
               <div class="vehicle-copy">
-                <h3>Luxury Trucks</h3>
-                <p>Durable protection and deep-cleaning packages for heavy-use vehicles.</p>
+                <h3>Trucks</h3>
+                <p>Attached truck photo represents heavy-duty detailing with luxury finish quality.</p>
+              </div>
+            </article>
+            <article class="vehicle-card">
+              <img src="assets/small-suv.jpg" alt="Small luxury SUV" loading="lazy" onerror="this.src='assets/suv.svg'" />
+              <div class="vehicle-copy">
+                <h3>Small SUVs</h3>
+                <p>Use your small SUV photo here to showcase compact premium vehicle care.</p>
               </div>
             </article>
           </div>
