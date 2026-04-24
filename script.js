@@ -15,6 +15,8 @@ const emailLink = document.getElementById("emailLink");
 const yearLabel = document.getElementById("year");
 const businessNameLabel = document.getElementById("businessName");
 const nextRedirectInput = document.getElementById("nextRedirect");
+const requestNotesInput = document.getElementById("requestNotes");
+const packageButtons = document.querySelectorAll(".package-btn");
 
 const serviceAddressInput = document.getElementById("serviceAddress");
 const addressPlaceIdInput = document.getElementById("addressPlaceId");
@@ -38,6 +40,36 @@ if (emailLink) {
 
 if (yearLabel) yearLabel.textContent = String(new Date().getFullYear());
 if (businessNameLabel) businessNameLabel.textContent = settings.businessName;
+
+function appendPackageToNotes(packageName, packageDetails) {
+  if (!requestNotesInput) return;
+
+  const summary = `Selected Package: ${packageName}\nPackage Details: ${packageDetails}`;
+  const existing = requestNotesInput.value.trim();
+
+  if (!existing) {
+    requestNotesInput.value = summary;
+    return;
+  }
+
+  if (existing.includes(`Selected Package: ${packageName}`)) {
+    return;
+  }
+
+  requestNotesInput.value = `${existing}\n\n${summary}`;
+}
+
+if (packageButtons.length) {
+  packageButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const packageName = button.dataset.package || "Selected Package";
+      const packageDetails = button.dataset.packageDetails || "";
+
+      appendPackageToNotes(packageName, packageDetails);
+      if (requestNotesInput) requestNotesInput.focus();
+    });
+  });
+}
 
 function clearAddressMetadata() {
   if (addressPlaceIdInput) addressPlaceIdInput.value = "";
@@ -102,8 +134,17 @@ if (quoteForm) {
     }
 
     const formData = new FormData(quoteForm);
-    formData.set("_next", settings.calendlyUrl);
-    formData.set("_redirect", settings.calendlyUrl);
+    const name = String(formData.get("name") || "").trim();
+    const email = String(formData.get("email") || "").trim();
+    const notes = String(formData.get("request") || "").trim();
+
+    const calendlyRedirectUrl = new URL(settings.calendlyUrl);
+    if (name) calendlyRedirectUrl.searchParams.set("name", name);
+    if (email) calendlyRedirectUrl.searchParams.set("email", email);
+    if (notes) calendlyRedirectUrl.searchParams.set("a1", notes);
+
+    formData.set("_next", calendlyRedirectUrl.toString());
+    formData.set("_redirect", calendlyRedirectUrl.toString());
 
     try {
       const response = await fetch(settings.formspreeEndpoint, {
@@ -118,7 +159,7 @@ if (quoteForm) {
         throw new Error("Form submission failed");
       }
 
-      window.location.assign(settings.calendlyUrl);
+      window.location.assign(calendlyRedirectUrl.toString());
     } catch (error) {
       if (formMessage) {
         formMessage.textContent =
