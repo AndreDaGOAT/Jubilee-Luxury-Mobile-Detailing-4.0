@@ -317,6 +317,22 @@ textarea:focus {
   border-radius: 10px;
 }
 
+
+.hero-photo {
+  width: 100%;
+  max-height: 360px;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+}
+
+.hero-fallback {
+  border: 1px dashed #d1bfa3;
+  border-radius: 10px;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  color: #625647;
+}
 .owner-fallback {
   border: 1px dashed #d1bfa3;
   border-radius: 10px;
