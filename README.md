@@ -1,8 +1,8 @@
 diff --git a/README.md b/README.md
-index 3f51556bdac43f16bf115da8792db6ab1c5d1532..b9ad6ff8c3215a797348434d9a70cc859aac8d33 100644
+index 3f51556bdac43f16bf115da8792db6ab1c5d1532..1226aea58a79922129166f6df52539bfae9dc1ef 100644
 --- a/README.md
 +++ b/README.md
-@@ -1,10 +1,38 @@
+@@ -1,10 +1,42 @@
 -- 👋 Hi, I’m @AndreDaGOAT
 -- 👀 I’m interested in programming, data analystics, AI coding..
 -- 🌱 I’m currently learning Python, AI coding enhancements...
@@ -29,20 +29,24 @@ index 3f51556bdac43f16bf115da8792db6ab1c5d1532..b9ad6ff8c3215a797348434d9a70cc85
 +
 +Save the attached images using these exact names:
 +
-+- Owner photo → `assets/owner.jpg`
-+- Home Page photo → `assets/home-page.jpg`
-+- Sedan photo → `assets/sedan.jpg`
-+- SUV photo → `assets/suv.jpg`
-+- Truck photo → `assets/truck.jpg`
-+- Small SUV photo → `assets/small-suv.jpg`
++- Owner photo → `assets/owner.png`
++- Home Page photo → `assets/home-page.png`
++- Sedan photo → `assets/sedan.png`
++- SUV photo → `assets/suv.png`
++- Truck photo → `assets/truck.png`
++- Small SUV photo → `assets/small-suv.png`
 +
-+If a JPG is missing, the site falls back to SVG graphics for vehicles.
++If a PNG is missing, the site falls back to SVG graphics for vehicles.
 +
 +## Active integrations
 +
 +- Formspree endpoint: `https://formspree.io/f/xqewgnbb`
 +- Calendly URL: `https://calendly.com/aarmstrong1234`
 +- Google Places autocomplete for service address
++- Calendly prefill mapping:
++  - `name` and `email`
++  - `a1` = notes/request
++  - `a2` and `location` = service address
 +
 +## Launch checklist
 +
