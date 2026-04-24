@@ -137,11 +137,16 @@ if (quoteForm) {
     const name = String(formData.get("name") || "").trim();
     const email = String(formData.get("email") || "").trim();
     const notes = String(formData.get("request") || "").trim();
+    const serviceAddress = String(formData.get("service_address") || "").trim();
 
     const calendlyRedirectUrl = new URL(settings.calendlyUrl);
     if (name) calendlyRedirectUrl.searchParams.set("name", name);
     if (email) calendlyRedirectUrl.searchParams.set("email", email);
     if (notes) calendlyRedirectUrl.searchParams.set("a1", notes);
+    if (serviceAddress) {
+      calendlyRedirectUrl.searchParams.set("location", serviceAddress);
+      calendlyRedirectUrl.searchParams.set("a2", serviceAddress);
+    }
 
     formData.set("_next", calendlyRedirectUrl.toString());
     formData.set("_redirect", calendlyRedirectUrl.toString());
