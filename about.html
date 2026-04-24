@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Jubilee Luxury Mobile Detailing</title>
+    <meta name="description" content="Learn Jubilee Luxury history, mission, and owner story." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="index.html">Jubilee Luxury Mobile Detailing</a>
+        <nav aria-label="Primary">
+          <ul class="nav">
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#gallery">Gallery</a></li>
+            <li><a href="index.html#quote">Quote</a></li>
+            <li><a href="index.html#booking">Booking</a></li>
+            <li><a href="about.html">About</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="section about-hero">
+        <div class="container two-col">
+          <div>
+            <p class="pill">About Jubilee Luxury</p>
+            <h1>Premier Luxury Transportation & Detailing Culture in Nashville.</h1>
+            <p class="lead">
+              Jubilee Luxury was built to merge elite service standards with reliable convenience for every client vehicle.
+            </p>
+          </div>
+          <div class="card owner-card">
+            <img
+              src="assets/owner.jpg"
+              alt="Jubilee Luxury owner portrait"
+              loading="lazy"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+            />
+            <div class="owner-fallback" style="display: none">
+              Please save the attached owner picture as <code>assets/owner.jpg</code> to display it here.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <h2>Our History</h2>
+          <div class="card history-copy">
+            <p>
+              Jubilee Luxury began with a commitment to premium presentation, punctual service, and trust-driven relationships.
+              Starting with private referrals, the brand quickly earned recognition for consistent high-end results and professional care.
+            </p>
+            <p>
+              Today Jubilee Luxury serves Nashville clients with a structured digital flow—from quote intake to appointment booking—while keeping the personalized touch expected from an executive-level service brand.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-alt">
+        <div class="container">
+          <h2>Featured Luxury Vehicle Types</h2>
+          <div class="vehicle-grid">
+            <article class="vehicle-card">
+              <img src="assets/sedan.svg" alt="Luxury sedan graphic" loading="lazy" />
+              <div class="vehicle-copy">
+                <h3>Executive Sedans</h3>
+                <p>Precision finish work and refined cabin presentation.</p>
+              </div>
+            </article>
+            <article class="vehicle-card">
+              <img src="assets/suv.svg" alt="Luxury SUV graphic" loading="lazy" />
+              <div class="vehicle-copy">
+                <h3>Premium SUVs</h3>
+                <p>Deep interior restoration and long-lasting protection.</p>
+              </div>
+            </article>
+            <article class="vehicle-card">
+              <img src="assets/truck.svg" alt="Luxury truck graphic" loading="lazy" />
+              <div class="vehicle-copy">
+                <h3>Luxury Trucks</h3>
+                <p>Durable detail packages for utility and upscale styling.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-wrap">
+        <p>© <span id="year"></span> <span id="businessName">Jubilee-Luxury-Mobile-Detailing Co.</span></p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
