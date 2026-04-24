@@ -196,6 +196,11 @@ h2 {
   margin-bottom: 0;
 }
 
+.package-btn {
+  margin-top: 0.5rem;
+  width: 100%;
+}
+
 .form {
   background: #fff;
   border: 1px solid var(--line);
