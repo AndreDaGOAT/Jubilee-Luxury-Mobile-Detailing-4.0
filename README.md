@@ -1,5 +1,5 @@
 diff --git a/README.md b/README.md
-index 3f51556bdac43f16bf115da8792db6ab1c5d1532..1226aea58a79922129166f6df52539bfae9dc1ef 100644
+index 3f51556bdac43f16bf115da8792db6ab1c5d1532..5ed91ab14fb1d9e642fb81e8427fbebc38e2dff5 100644
 --- a/README.md
 +++ b/README.md
 @@ -1,10 +1,42 @@
@@ -13,45 +13,45 @@ index 3f51556bdac43f16bf115da8792db6ab1c5d1532..1226aea58a79922129166f6df52539bf
 -AndreDaGOAT/AndreDaGOAT is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 -You can click the Preview link to take a look at your changes.
 ---->
-+# Jubilee Luxury Mobile Detailing (GitHub Pages)
++# JECS Quick Wash (GitHub Pages)
 +
-+Luxury-themed static site with quote capture, booking redirect, About page history, and image-driven vehicle showcase.
++JECS Quick Wash is a mobile, location-first wash request system focused on workplaces and high-traffic parking locations.
 +
-+## Included pages/files
++## Service model shift
 +
-+- `index.html` — homepage with hero, services, gallery, quote, and booking flow
-+- `about.html` — Jubilee history + owner section
-+- `styles.css` — full luxury redesign styling
-+- `script.js` — settings + Formspree + Calendly redirect + Google Places
-+- `assets/sedan.svg`, `assets/suv.svg`, `assets/truck.svg` — fallback graphics
++- Brand renamed to **JECS Quick Wash**.
++- UX changed to a simple **Request Wash** workflow (no calendar-first flow).
++- Form captures **address + GPS coordinates** to support dispatch and routing.
++- Architecture supports **Formspree (temporary)** plus **Supabase/PostGIS (target)**.
 +
-+## Add attached images (required)
++## Current stack
 +
-+Save the attached images using these exact names:
++- `index.html` — homepage, services, request form, operations model
++- `about.html` — history and mission
++- `script.js` — geolocation capture, Google Places autocomplete, Formspree submit, optional Supabase write
++- `styles.css` — existing UI system
 +
-+- Owner photo → `assets/owner.png`
-+- Home Page photo → `assets/home-page.png`
-+- Sedan photo → `assets/sedan.png`
-+- SUV photo → `assets/suv.png`
-+- Truck photo → `assets/truck.png`
-+- Small SUV photo → `assets/small-suv.png`
++## Required integrations
 +
-+If a PNG is missing, the site falls back to SVG graphics for vehicles.
++- Form endpoint: `https://formspree.io/f/xqewgnbb`
++- Google Places API script with `libraries=places`
++- Optional Supabase REST values in `script.js`:
++  - `supabaseUrl`
++  - `supabaseAnonKey`
 +
-+## Active integrations
++## Suggested Supabase table
 +
-+- Formspree endpoint: `https://formspree.io/f/xqewgnbb`
-+- Calendly URL: `https://calendly.com/aarmstrong1234`
-+- Google Places autocomplete for service address
-+- Calendly prefill mapping:
-+  - `name` and `email`
-+  - `a1` = notes/request
-+  - `a2` and `location` = service address
++Table: `wash_requests`
++- `id` uuid primary key
++- `name` text
++- `email` text
++- `phone` text
++- `address` text
++- `service` text
++- `notes` text
++- `latitude` double precision
++- `longitude` double precision
++- `place_id` text
++- `created_at` timestamp default now()
 +
-+## Launch checklist
-+
-+1. Commit and push to GitHub.
-+2. Enable GitHub Pages with GitHub Actions as source.
-+3. Validate:
-+   - quote submission redirects to Calendly
-+   - owner/home/gallery images render correctly
++Then add PostGIS geometry column for map routing and queue dashboards.
