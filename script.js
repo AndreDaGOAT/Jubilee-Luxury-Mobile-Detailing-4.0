@@ -8,7 +8,7 @@ const settings = {
   supabaseAnonKey: "",
 };
 
-const washForm = document.getElementById("washForm");
+const washForm = document.getElementById("customerForm");
 const formMessage = document.getElementById("formMessage");
 const yearLabel = document.getElementById("year");
 const businessNameLabel = document.getElementById("businessName");
@@ -54,49 +54,3 @@ window.initGooglePlaces = function initGooglePlaces() {
     }
   });
 };
-
-async function sendToSupabase(payload) {
-  if (!settings.supabaseUrl || !settings.supabaseAnonKey) return;
-  await fetch(`${settings.supabaseUrl}/rest/v1/wash_requests`, {
-    method: "POST",
-    headers: {
-      apikey: settings.supabaseAnonKey,
-      Authorization: `Bearer ${settings.supabaseAnonKey}`,
-      "Content-Type": "application/json",
-      Prefer: "return=minimal",
-    },
-    body: JSON.stringify(payload),
-  });
-}
-
-if (washForm) {
-  washForm.addEventListener("submit", async (event) => {
-    event.preventDefault();
-    if (!washForm.checkValidity()) {
-      washForm.reportValidity();
-      return;
-    }
-
-    const formData = new FormData(washForm);
-    const payload = Object.fromEntries(formData.entries());
-
-    if (formMessage) formMessage.textContent = "Submitting request...";
-
-    try {
-      await Promise.all([
-        fetch(settings.formspreeEndpoint, {
-          method: "POST",
-          body: formData,
-          headers: { Accept: "application/json" },
-        }),
-        sendToSupabase(payload),
-      ]);
-
-      if (formMessage) formMessage.textContent = "Request received. Our team will route your wash stop shortly.";
-      washForm.reset();
-      getLocation();
-    } catch (error) {
-      if (formMessage) formMessage.textContent = "Could not submit right now. Please try again.";
-    }
-  });
-}
