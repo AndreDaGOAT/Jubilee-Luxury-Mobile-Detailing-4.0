@@ -1,8 +1,8 @@
 diff --git a/README.md b/README.md
-index 3f51556bdac43f16bf115da8792db6ab1c5d1532..5ed91ab14fb1d9e642fb81e8427fbebc38e2dff5 100644
+index 3f51556bdac43f16bf115da8792db6ab1c5d1532..87f30e101fb62242f7012f85cdbb61806f46e9c1 100644
 --- a/README.md
 +++ b/README.md
-@@ -1,10 +1,42 @@
+@@ -1,10 +1,43 @@
 -- 👋 Hi, I’m @AndreDaGOAT
 -- 👀 I’m interested in programming, data analystics, AI coding..
 -- 🌱 I’m currently learning Python, AI coding enhancements...
@@ -28,7 +28,8 @@ index 3f51556bdac43f16bf115da8792db6ab1c5d1532..5ed91ab14fb1d9e642fb81e8427fbebc
 +
 +- `index.html` — homepage, services, request form, operations model
 +- `about.html` — history and mission
-+- `script.js` — geolocation capture, Google Places autocomplete, Formspree submit, optional Supabase write
++- `script.js` — geolocation capture and Google Places autocomplete
++- `supabase-submit.js` — module-based dual submit to Formspree + Supabase
 +- `styles.css` — existing UI system
 +
 +## Required integrations
