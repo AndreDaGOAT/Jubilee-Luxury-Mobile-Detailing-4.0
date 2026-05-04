@@ -1,177 +1,102 @@
 const settings = {
-  businessName: "Jubilee-Luxury-Mobile-Detailing Co.",
+  businessName: "JECS Quick Wash",
   phone: "+6153487683",
   displayPhone: "(615) 348-7683",
   email: "Contact@jubileeexecutivecarservice.com",
-  calendlyUrl: "https://calendly.com/aarmstrong1234",
   formspreeEndpoint: "https://formspree.io/f/xqewgnbb",
+  supabaseUrl: "",
+  supabaseAnonKey: "",
 };
 
-const bookingLink = document.getElementById("bookingLink");
-const quoteForm = document.getElementById("quoteForm");
+const washForm = document.getElementById("washForm");
 const formMessage = document.getElementById("formMessage");
-const phoneLink = document.getElementById("phoneLink");
-const emailLink = document.getElementById("emailLink");
 const yearLabel = document.getElementById("year");
 const businessNameLabel = document.getElementById("businessName");
-const nextRedirectInput = document.getElementById("nextRedirect");
-const requestNotesInput = document.getElementById("requestNotes");
-const packageButtons = document.querySelectorAll(".package-btn");
-
-const serviceAddressInput = document.getElementById("serviceAddress");
-const addressPlaceIdInput = document.getElementById("addressPlaceId");
-const addressLatInput = document.getElementById("addressLat");
-const addressLngInput = document.getElementById("addressLng");
-const addressHint = document.getElementById("addressHint");
-
-if (bookingLink) bookingLink.href = settings.calendlyUrl;
-if (quoteForm) quoteForm.action = settings.formspreeEndpoint;
-if (nextRedirectInput) nextRedirectInput.value = settings.calendlyUrl;
-
-if (phoneLink) {
-  phoneLink.href = `tel:${settings.phone}`;
-  phoneLink.textContent = `Call ${settings.displayPhone}`;
-}
-
-if (emailLink) {
-  emailLink.href = `mailto:${settings.email}`;
-  emailLink.textContent = settings.email;
-}
+const addressInput = document.getElementById("address");
+const latInput = document.getElementById("lat");
+const lngInput = document.getElementById("lng");
+const placeIdInput = document.getElementById("placeId");
+const locationHint = document.getElementById("locationHint");
 
 if (yearLabel) yearLabel.textContent = String(new Date().getFullYear());
 if (businessNameLabel) businessNameLabel.textContent = settings.businessName;
+if (washForm) washForm.action = settings.formspreeEndpoint;
 
-function appendPackageToNotes(packageName, packageDetails) {
-  if (!requestNotesInput) return;
-
-  const summary = `Selected Package: ${packageName}\nPackage Details: ${packageDetails}`;
-  const existing = requestNotesInput.value.trim();
-
-  if (!existing) {
-    requestNotesInput.value = summary;
-    return;
-  }
-
-  if (existing.includes(`Selected Package: ${packageName}`)) {
-    return;
-  }
-
-  requestNotesInput.value = `${existing}\n\n${summary}`;
-}
-
-if (packageButtons.length) {
-  packageButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const packageName = button.dataset.package || "Selected Package";
-      const packageDetails = button.dataset.packageDetails || "";
-
-      appendPackageToNotes(packageName, packageDetails);
-      if (requestNotesInput) requestNotesInput.focus();
-    });
+function getLocation() {
+  if (!navigator.geolocation) return;
+  navigator.geolocation.getCurrentPosition((position) => {
+    if (latInput) latInput.value = String(position.coords.latitude);
+    if (lngInput) lngInput.value = String(position.coords.longitude);
   });
 }
 
-function clearAddressMetadata() {
-  if (addressPlaceIdInput) addressPlaceIdInput.value = "";
-  if (addressLatInput) addressLatInput.value = "";
-  if (addressLngInput) addressLngInput.value = "";
-}
-
-if (serviceAddressInput) {
-  serviceAddressInput.addEventListener("input", clearAddressMetadata);
-}
+getLocation();
 
 window.initGooglePlaces = function initGooglePlaces() {
-  if (!window.google?.maps?.places || !serviceAddressInput) {
-    if (addressHint) {
-      addressHint.textContent =
-        "Google Places did not load. You can still type your full service address manually.";
-    }
+  if (!window.google?.maps?.places || !addressInput) {
+    if (locationHint) locationHint.textContent = "Google Places unavailable. Enter your full location manually.";
     return;
   }
 
-  const autocomplete = new google.maps.places.Autocomplete(serviceAddressInput, {
+  const autocomplete = new google.maps.places.Autocomplete(addressInput, {
     fields: ["formatted_address", "geometry", "place_id"],
     types: ["address"],
   });
 
   autocomplete.addListener("place_changed", () => {
     const place = autocomplete.getPlace();
-
     if (!place?.formatted_address) return;
-
-    serviceAddressInput.value = place.formatted_address;
-
-    if (addressPlaceIdInput) addressPlaceIdInput.value = place.place_id || "";
+    addressInput.value = place.formatted_address;
+    if (placeIdInput) placeIdInput.value = place.place_id || "";
     if (place.geometry?.location) {
-      if (addressLatInput) addressLatInput.value = String(place.geometry.location.lat());
-      if (addressLngInput) addressLngInput.value = String(place.geometry.location.lng());
+      if (latInput) latInput.value = String(place.geometry.location.lat());
+      if (lngInput) lngInput.value = String(place.geometry.location.lng());
     }
   });
 };
 
-if (quoteForm) {
-  quoteForm.addEventListener("submit", async (event) => {
+async function sendToSupabase(payload) {
+  if (!settings.supabaseUrl || !settings.supabaseAnonKey) return;
+  await fetch(`${settings.supabaseUrl}/rest/v1/wash_requests`, {
+    method: "POST",
+    headers: {
+      apikey: settings.supabaseAnonKey,
+      Authorization: `Bearer ${settings.supabaseAnonKey}`,
+      "Content-Type": "application/json",
+      Prefer: "return=minimal",
+    },
+    body: JSON.stringify(payload),
+  });
+}
+
+if (washForm) {
+  washForm.addEventListener("submit", async (event) => {
     event.preventDefault();
-
-    if (!quoteForm.checkValidity()) {
-      quoteForm.reportValidity();
+    if (!washForm.checkValidity()) {
+      washForm.reportValidity();
       return;
     }
 
-    if (!settings.formspreeEndpoint || settings.formspreeEndpoint.includes("your-form-id")) {
-      if (formMessage) {
-        formMessage.textContent = "Setup required: add your real Formspree endpoint in script.js.";
-      }
-      return;
-    }
+    const formData = new FormData(washForm);
+    const payload = Object.fromEntries(formData.entries());
 
-    const submitButton = quoteForm.querySelector('button[type="submit"]');
-    if (submitButton) submitButton.disabled = true;
-
-    if (formMessage) {
-      formMessage.textContent = "Submitting your details... Redirecting to booking in a moment.";
-    }
-
-    const formData = new FormData(quoteForm);
-    const name = String(formData.get("name") || "").trim();
-    const email = String(formData.get("email") || "").trim();
-    const notes = String(formData.get("request") || "").trim();
-    const serviceAddress = String(formData.get("service_address") || "").trim();
-
-    const calendlyRedirectUrl = new URL(settings.calendlyUrl);
-    if (name) calendlyRedirectUrl.searchParams.set("name", name);
-    if (email) calendlyRedirectUrl.searchParams.set("email", email);
-    if (notes) calendlyRedirectUrl.searchParams.set("a1", notes);
-    if (serviceAddress) {
-      calendlyRedirectUrl.searchParams.set("location", serviceAddress);
-      calendlyRedirectUrl.searchParams.set("a2", serviceAddress);
-    }
-
-    formData.set("_next", calendlyRedirectUrl.toString());
-    formData.set("_redirect", calendlyRedirectUrl.toString());
+    if (formMessage) formMessage.textContent = "Submitting request...";
 
     try {
-      const response = await fetch(settings.formspreeEndpoint, {
-        method: "POST",
-        body: formData,
-        headers: {
-          Accept: "application/json",
-        },
-      });
+      await Promise.all([
+        fetch(settings.formspreeEndpoint, {
+          method: "POST",
+          body: formData,
+          headers: { Accept: "application/json" },
+        }),
+        sendToSupabase(payload),
+      ]);
 
-      if (!response.ok) {
-        throw new Error("Form submission failed");
-      }
-
-      window.location.assign(calendlyRedirectUrl.toString());
+      if (formMessage) formMessage.textContent = "Request received. Our team will route your wash stop shortly.";
+      washForm.reset();
+      getLocation();
     } catch (error) {
-      if (formMessage) {
-        formMessage.textContent =
-          "We could not submit the form right now. Please try again, then use the booking button below.";
-      }
-    } finally {
-      if (submitButton) submitButton.disabled = false;
+      if (formMessage) formMessage.textContent = "Could not submit right now. Please try again.";
     }
   });
 }
