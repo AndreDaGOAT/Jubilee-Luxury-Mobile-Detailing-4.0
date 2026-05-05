@@ -1,8 +1,8 @@
 diff --git a/README.md b/README.md
-index 3f51556bdac43f16bf115da8792db6ab1c5d1532..87f30e101fb62242f7012f85cdbb61806f46e9c1 100644
+index 3f51556bdac43f16bf115da8792db6ab1c5d1532..a7fcdc3937e9892d5bbde4c107b40315ed9d4a7c 100644
 --- a/README.md
 +++ b/README.md
-@@ -1,10 +1,43 @@
+@@ -1,10 +1,44 @@
 -- 👋 Hi, I’m @AndreDaGOAT
 -- 👀 I’m interested in programming, data analystics, AI coding..
 -- 🌱 I’m currently learning Python, AI coding enhancements...
@@ -22,6 +22,7 @@ index 3f51556bdac43f16bf115da8792db6ab1c5d1532..87f30e101fb62242f7012f85cdbb6180
 +- Brand renamed to **JECS Quick Wash**.
 +- UX changed to a simple **Request Wash** workflow (no calendar-first flow).
 +- Form captures **address + GPS coordinates** to support dispatch and routing.
++- Form now requires **SMS phone verification code** before request submission (Supabase Auth OTP).
 +- Architecture supports **Formspree (temporary)** plus **Supabase/PostGIS (target)**.
 +
 +## Current stack
@@ -29,7 +30,7 @@ index 3f51556bdac43f16bf115da8792db6ab1c5d1532..87f30e101fb62242f7012f85cdbb6180
 +- `index.html` — homepage, services, request form, operations model
 +- `about.html` — history and mission
 +- `script.js` — geolocation capture and Google Places autocomplete
-+- `supabase-submit.js` — module-based dual submit to Formspree + Supabase
++- `supabase-submit.js` — module-based SMS verification + dual submit to Formspree + Supabase
 +- `styles.css` — existing UI system
 +
 +## Required integrations
