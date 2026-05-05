@@ -47,7 +47,7 @@
             </div>
           </div>
           <aside class="card hero-card">
-            <img class="hero-photo" src="assets/656D26D6-29F5-40B1-9E49-463421B80394.png" alt="JECS Quick Wash mobile wash on-site" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <img class="hero-photo" src="assets/home-page.png" alt="JECS Quick Wash mobile wash on-site" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
             <div class="hero-fallback" style="display:none">Add your home image as <code>assets/home-page.png</code>.</div>
           </aside>
         </div>
@@ -86,13 +86,20 @@
         <div class="container two-col">
           <div>
             <h2>Request Wash</h2>
-            <p>Share your contact and service location details so we can find you easily and schedule your wash efficiently. We use your address and GPS location to optimize routing and reduce wait times.</p>
+            <p>Enter your contact and location details. We capture address + GPS coordinates for route planning and queue management.</p>
           </div>
 
           <form id="customerForm" class="form" action="https://formspree.io/f/xqewgnbb" method="POST" novalidate>
             <input type="text" name="name" placeholder="Full Name" required />
             <input type="email" name="email" placeholder="Email" required />
-            <input type="tel" name="phone" placeholder="Phone Number" required />
+            <input type="tel" id="phoneInput" name="phone" placeholder="Phone Number" required />
+
+            <div class="otp-row">
+              <button class="btn btn-secondary" id="sendCodeBtn" type="button">Text Verification Code</button>
+            </div>
+            <input type="text" id="smsCode" name="sms_code" placeholder="Enter SMS verification code" />
+            <button class="btn btn-secondary" id="verifyCodeBtn" type="button">Verify Code</button>
+            <input type="hidden" id="phoneVerified" name="phone_verified" value="false" />
             <input id="address" type="text" name="address" placeholder="Workplace or Parking Location" required />
 
             <select name="service" required>
@@ -117,19 +124,18 @@
       <section id="ops" class="section">
         <div class="container two-col">
           <div>
-            <h2>How It Works</h2>
-<p>Your request is instantly organized so our team can group nearby washes, assign the closest crew, and deliver fast, efficient service right where you are.</p>
-</div>
-
-          <div class="card">
-              <h3>Service Process</h3>
-          <div class="pipeline">
-            <span>Submit Request</span>
-            <span>Confirm Location</span>
-            <span>Schedule & Routing</span>
-            <span>On-Site Wash</span>
-            <span>Easy Rebooking</span>
+            <h2>Operations Model</h2>
+            <p>Form entries are designed to flow into a spatial database so JECS staff can batch nearby requests, assign routes, and track service coverage.</p>
           </div>
+          <div class="card">
+            <h3>Data Flow</h3>
+            <div class="pipeline">
+              <span>Request Form</span>
+              <span>Address + GPS</span>
+              <span>Queue + Routing</span>
+              <span>On-site Wash</span>
+              <span>Repeat Service</span>
+            </div>
           </div>
         </div>
       </section>
